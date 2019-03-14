@@ -106,3 +106,9 @@
   
 - Tip: docker run 시에 --rm 옵션을 붙이면, stop시에 자동 remove된다.
 - Tip: docker rm -f mynginx 명령은 stop하지 않고도 강제로 remove할 수 있음
+
+#### 장고 프로젝트
+- Django Server -> Azure Containers for Web App
+  - Docker Registry Service -> Docker Hub or Azure Container Registry
+- 정적 파일 저장소(static/media) -> Azure Storage Accounts
+- 관계형 데이터베이스 -> Azure Dataase for PostgreSQL
