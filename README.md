@@ -78,3 +78,31 @@
   - docker run -p 80(호스트 측/외부에서 들어오는 요청이 들어오는 포트):80(실행 할 컨테이너 측/도커에서는 해당 컨테이너의 8000번 포트로 요청을 전달) 명령으로
 - CMD: Imge build할 때 실행되는 명령이 아니라, docker run~ 명령을 실행할 때, CMD를 실행
 - docker run 명령어 입력 -> 명령어에서 지정한 Image에서 container가 만들어지고 -> 그 다음 바로 이어서 CMD가 실행
+
+#### 간단히 Docker 살펴보기
+- docker run '옵션들' '도커 공식 이미지 이름':'버전'
+  - docker run --rm -it python:3.7-stretch
+- docker run '옵션들' '이미지 작성자 id'/'도커 이미지 이름':'버전' '기본CMD 대신 수행할 CMD'
+- 버전이 없다면, 가장 최신 버전으로
+- container가 만들어지면 start 상태 -> container을 빠져나오면 stop 상태 -> 이후에 rm 명령어를 통해 해당 container을 삭제
+- 자주 사용하는 옵션
+  - '--rm' 옵션: container을 빠져나오면, 해당 continaer을 바로 삭제 -> Immutable Infrastructure 패러다임
+  - '--name': container의 이름 생성
+  - '--detach':실행을 할 때 detach모드로 실행하겠다 = 호스트 입장에서 background로 동작시키겠다는 것
+  - '-it': -i와 -t를 동시에 사용한 것으로 터미널 입력을 위한 옵션
+  - 해당 콘솔에서 여러 container생성 명령 입력/실행 가능 사용할 수 있음, 만약 이 옵션이 없다면, 호스트 입장에서 foreground모드로 샐행되어 해당 콘솔로는 더이상 어떠한 작업 x
+
+- nginx 웹서버 띄우기 
+  - docker run --detach(-d) --publish(-p) 8080:80 --name mynginx nginx 
+  - >nginx이미지를 통해 mynginx Container 적재 및 실행
+  - >nginx이미지는 80포트(Image마다 포트는 각기 다름)로 listen으로 세팅되어있음
+  - >host의 8080포트와 container의 80포트를 연결
+  - docker stop mynginx
+  - docker rm mynginx
+- 호스트 머신 측 컨텐츠로 html 서빙하기 (nginx의 default html이 아닌)
+  - 현재 디렉토리 내 html/index.html 존재
+  - pwd 명령어: 현재 디렉토리 출력
+  - docker run -d -p 8080:80 --volume `pwd`/html(호스트측 html 경로):/usr/share/nginx/html --name mynginx nginx
+  
+- Tip: docker run 시에 --rm 옵션을 붙이면, stop시에 자동 remove된다.
+- Tip: docker rm -f mynginx 명령은 stop하지 않고도 강제로 remove할 수 있음
