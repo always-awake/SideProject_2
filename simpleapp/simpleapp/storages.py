@@ -3,7 +3,7 @@ from storages.backends.azure_storage import AzureStorage
 
 
 class StaticAzureStorage(AzureStorage):
-    azure_container = '.static'
+    azure_container = 'static'
 
     def url(self, name):
         if not settings.DEBUG:
@@ -14,4 +14,4 @@ class StaticAzureStorage(AzureStorage):
 
 
 class MediaAzureStorage(AzureStorage):
-    azure_container = '.media'
+    azure_container = 'media'
