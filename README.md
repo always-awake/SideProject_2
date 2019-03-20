@@ -111,4 +111,37 @@
 - Django Server -> Azure Containers for Web App
   - Docker Registry Service -> Docker Hub or Azure Container Registry
 - 정적 파일 저장소(static/media) -> Azure Storage Accounts
+<<<<<<< Updated upstream
 - 관계형 데이터베이스 -> Azure Dataase for PostgreSQL
+=======
+- 관계형 데이터베이스 -> Azure Database for PostgreSQL
+
+#### Azure 리소스 만들기
+- Azure Storage Accounts 생성
+- Azure Dataase for PostgreSQL 생성
+- storages.py 의 azure_container = 'static' 와 azure_container = 'media' 설정에 맞는 이름의 container(media 이름의 container,  static 이름의 container)를 azure storage(Blob Container)에 생성해준다.
+- vi dev_run.sh 명령어를 통해 dev_run.sh 안에 아래 환경변수들을 입력
+- 실행에 필요한 환경변수(6) -> 컨테이너를 적재할 때, 아래 환경변수를 넘겨줘야함
+  - AZURE_ACCOUNT_NAME (액세스 키 -> 스토리지 계정 이름)
+  - AZURE_ACCOUNT_KEY (액세스 키 -> key)
+  - DB_HOST (Server name)
+  - DB_NAME (기본이름: postgres / 여러개 생성 가능)
+  - DB_USER (Server admin login name: 서버 관리자 로그인 이름)
+  - DB_PASSWORD (DB 생성시 설정한 비밀번호)
+- 아래 형식에 맞춰 적어줌
+```
+docker run \
+    -e AZURE_ACCOUNT_NAME="**" \
+    -e AZURE_ACCOUNT_KEY="**" \
+    -e DB_HOST="**" \
+    -e DB_NAME="postgres" \
+    -e DB_USER="**" \
+    -e DB_PASSWORD="**" \
+    --rm -it \
+    이미지명 sh
+```
+- sh dev_run.sh 명령어로 쉘 실행 
+  - python 실행 후, import os/os.environ 명령을 통해 환경변수가 잘 지정되어 있는지 확인하기
+- python3 manage.py collectstatic --no-input 명령어 실행
+  - ValueError: container_name should not be None. 오류 -> 환경변수를 통해 이름 지정 또는 settings/prod.py 내에 하드 코딩으로 지정
+  
