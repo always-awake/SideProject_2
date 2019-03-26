@@ -144,4 +144,8 @@ docker run \
   - python 실행 후, import os/os.environ 명령을 통해 환경변수가 잘 지정되어 있는지 확인하기
 - python3 manage.py collectstatic --no-input 명령어 실행
   - ValueError: container_name should not be None. 오류 -> 환경변수를 통해 이름 지정 또는 settings/prod.py 내에 하드 코딩으로 지정
-  
+- python3 manage.py collectstatic --no-input
+- python3 manage.py showmigrations
+- python3 manage.py crestesuperuser
+- exit
+
