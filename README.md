@@ -111,9 +111,6 @@
 - Django Server -> Azure Containers for Web App
   - Docker Registry Service -> Docker Hub or Azure Container Registry
 - 정적 파일 저장소(static/media) -> Azure Storage Accounts
-<<<<<<< Updated upstream
-- 관계형 데이터베이스 -> Azure Dataase for PostgreSQL
-=======
 - 관계형 데이터베이스 -> Azure Database for PostgreSQL
 
 #### Azure 리소스 만들기
